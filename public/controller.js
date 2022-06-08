@@ -9,10 +9,29 @@ const imgs = [
 const wsClient = new WebSocket('ws://localhost:8080')
 const imageContainer = document.getElementById('imgs')
 let i = 0;
-wsClient.onopen = ()=>{
+let mt = ml = 0;
+wsClient.onopen = () => {
     wsClient.send('hello')
 }
-wsClient.onmessage = (data)=>{
-    i++
-    imageContainer.src = imgs[i%imgs.length]
+wsClient.onmessage = (data) => {
+    const message = data.data
+    if (message == 'left') {
+        ml-=10
+        imageContainer.style.marginLeft = ml+'px'
+    }
+    else if (message == 'right') {
+        ml+=10
+        imageContainer.style.marginLeft = ml+'px'
+    }
+    else if (message == 'up') {
+        mt-=10
+        imageContainer.style.marginTop = mt+'px'
+    }
+    else if (message == 'down') {
+        mt+=10
+        imageContainer.style.marginTop = mt+'px'
+    } else {
+        i++
+        imageContainer.src = imgs[i % imgs.length]
+    }
 }

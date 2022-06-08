@@ -39,8 +39,18 @@ if (cluster.isPrimary){
     
     socket.on('message', (msg,info)=>{
         //console.log(msg.toString())
-        if (connection)
-            connection.send('ok')
+        if (connection){
+            if (msg.toString() == 'right')
+                connection.send('right')
+            else if (msg.toString() == 'left')
+                connection.send('left')
+            else if (msg.toString() == 'up')
+                connection.send('up')
+            else if (msg.toString() == 'down')
+                connection.send('down')
+            else
+                connection.send('change')
+        }
         //socket.send('This is the response', 5000, info.address)
     })
     
