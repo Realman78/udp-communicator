@@ -30,8 +30,32 @@ wsClient.onmessage = (data) => {
     else if (message == 'down') {
         mt+=10
         imageContainer.style.marginTop = mt+'px'
-    } else {
-        i++
-        imageContainer.src = imgs[i % imgs.length]
+    }else if (message == 'lu') {
+        ml-=5
+        mt-=5
+        imageContainer.style.marginLeft = ml+'px'
+        imageContainer.style.marginTop = mt+'px'
     }
+    else if (message == 'ld') {
+        ml-=5
+        mt+=5
+        imageContainer.style.marginLeft = ml+'px'
+        imageContainer.style.marginTop = mt+'px'
+    }
+    else if (message == 'rd') {
+        ml+=5
+        mt+=5
+        imageContainer.style.marginLeft = ml+'px'
+        imageContainer.style.marginTop = mt+'px'
+    }
+    else if (message == 'ru') {
+        ml+=5
+        mt-=5
+        imageContainer.style.marginLeft = ml+'px'
+        imageContainer.style.marginTop = mt+'px'
+    }
+    // } else {
+    //     i++
+    //     imageContainer.src = imgs[i % imgs.length]
+    // }
 }

@@ -39,20 +39,18 @@ if (cluster.isPrimary){
     
     socket.on('message', (msg,info)=>{
         //console.log(msg.toString())
+
         if (connection){
-            if (msg.toString() == 'right')
-                connection.send('right')
-            else if (msg.toString() == 'left')
-                connection.send('left')
-            else if (msg.toString() == 'up')
-                connection.send('up')
-            else if (msg.toString() == 'down')
-                connection.send('down')
-            else
-                connection.send('change')
+            connection.send(getDirection(Number.parseInt(msg.toString())))
         }
         //socket.send('This is the response', 5000, info.address)
     })
     
     socket.bind(5000) 
+}
+
+function getDirection(angle) {
+    var directions = ['right', 'ru', 'up', 'lu', 'left', 'ld', 'down', 'rd'];
+    var index = Math.round(((angle %= 360) < 0 ? angle + 360 : angle) / 45) % 8;
+    return directions[index];
 }
