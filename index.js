@@ -4,6 +4,8 @@ const http = require('http')
 const path = require('path')
 const os = require('os')
 const cluster = require('cluster')
+cluster.schedulingPolicy = cluster.SCHED_RR
+
 
 if (cluster.isPrimary){
     for (let i = 0; i < os.cpus().length; i++){
